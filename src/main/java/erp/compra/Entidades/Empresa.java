@@ -3,7 +3,6 @@ package erp.compra.Entidades;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -15,15 +14,19 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import lombok.Getter;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "empresa")
-@Setter
-@Getter
+@Data
+@ToString(of = {"nombre", "direccion"})
 @NoArgsConstructor
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Empresa implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -43,7 +46,7 @@ public class Empresa implements Serializable {
     @Size(max = 65535)
     @Column(name = "direccion")
     private String direccion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "empresa", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "empresa", fetch = FetchType.LAZY)
     private List<Sucursal> sucursalList;
 
 }

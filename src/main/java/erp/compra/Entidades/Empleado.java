@@ -3,6 +3,7 @@ package erp.compra.Entidades;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -15,14 +16,17 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import lombok.Getter;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "empleado")
-@Setter
-@Getter
+@Data
+@ToString(of = "nombre")
 @NoArgsConstructor
 public class Empleado implements Serializable {
 
@@ -43,20 +47,16 @@ public class Empleado implements Serializable {
     private String email;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
     @Column(name = "telefono")
     private String telefono;
     @Basic(optional = false)
     @NotNull
     @Lob
-    @Size(min = 1, max = 65535)
     @Column(name = "direccion")
     private String direccion;
+    @JsonIgnore
+    @Embedded
     @JoinColumn(name = "sucursal", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(fetch  = FetchType.LAZY) 
     private Sucursal sucursal;
-    @JoinColumn(name = "Usuario_id", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Usuario usuarioid;
-
 }

@@ -53,5 +53,6 @@ public class Compra implements Serializable {
     private Usuario usuario;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "compra", fetch = FetchType.LAZY)
     private List<Ordencompra> ordencompraList;
-
+    
+    
 }

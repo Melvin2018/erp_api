@@ -13,23 +13,26 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.PostPersist;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import lombok.Getter;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "sucursal")
-@Setter
-@Getter
+@Data
+@ToString(of = { "id", "nombre", "encargado" })
 @NoArgsConstructor
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Sucursal implements Serializable {
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,15 +53,21 @@ public class Sucursal implements Serializable {
     @Size(max = 65535)
     @Column(name = "direccion")
     private String direccion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sucursal", fetch = FetchType.LAZY)
-    private List<Empleado> empleadoList;
     @JoinColumn(name = "empresa", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Empresa empresa;
     @JoinColumn(name = "encargado", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Usuario encargado;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "sucursal", fetch = FetchType.LAZY)
+    @JsonIgnore
+    @OneToMany(mappedBy = "sucursal", fetch = FetchType.LAZY)
     private List<Inventario> inventarioList;
+    @JsonIgnore
+    @OneToMany(mappedBy = "sucursal", fetch = FetchType.LAZY)
+    private List<Empleado> empleadoList;
 
+    @PostPersist
+    public void sucu() {
+        this.encargado.getIdEmpleado().setSucursal(this);
+    }
 }
