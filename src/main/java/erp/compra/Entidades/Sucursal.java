@@ -57,7 +57,7 @@ public class Sucursal implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Empresa empresa;
     @JoinColumn(name = "encargado", referencedColumnName = "id")
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Usuario encargado;
     @JsonIgnore
     @OneToMany(mappedBy = "sucursal", fetch = FetchType.LAZY)

@@ -5,16 +5,17 @@ import java.util.Optional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import erp.compra.Entidades.Categoria;
+import erp.compra.Entidades.*;
 import erp.compra.Repositorio.Repo_Categoria;
 
 
 @Service
 public class Service_Categoria {
+    
     private Repo_Categoria categoria;
 
-    public List<Categoria> findAll() {
-        return categoria.findAll();
+    public ResponseEntity<List<Categoria>> findAll() {
+        return ResponseEntity.ok(categoria.findAll());
     }
 
     public ResponseEntity<Categoria> findOne(Long id) {

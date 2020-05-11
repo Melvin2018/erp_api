@@ -12,34 +12,33 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import erp.compra.Entidades.Marca;
+import erp.compra.Entidades.*;
 import erp.compra.Servicios.Service_Marca;
 
 @RestController
 @RequestMapping(value = "/api/v1/")
 public class MarcaController {
     @Autowired
-    private Service_Marca marca;
+    private Service_Marca repo_marca;
   
 
-    @GetMapping(value="categoria/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value="marca", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Marca> findAll() {
-        return marca.findAll();
+        return repo_marca.findAll();
     }
 
-    @GetMapping(value = "categoria/{id}", produces = "application/json; charset=utf-8")
-    public ResponseEntity<Marca> empresa(@PathVariable(value = "id", required = true) Long id) {
-        return marca.findOne(id);
+    @GetMapping(value = "marca/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Marca> findBy(@PathVariable(value = "id", required = true) Long id) {
+        return repo_marca.findOne(id);
     }
 
-    @PostMapping(value = "categoria", produces = "application/json; charset=utf-8", consumes = "application/json")
-    public Marca save(@RequestBody Marca inventarioo) {
-        return marca.save(inventarioo);
+    @PostMapping(value = "marca", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Marca save(@RequestBody Marca marca) {
+        return repo_marca.save(marca);
     }
 
-    @DeleteMapping(value="categoria/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value="marca/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Marca> deleteById(@PathVariable(value = "id", required = true) Long id) {
-        return marca.deleteById(id);
+        return repo_marca.deleteById(id);
     }
 }

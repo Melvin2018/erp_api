@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import erp.compra.Entidades.Inventario;
-import erp.compra.Entidades.Sucursal;
+import erp.compra.Entidades.*;
 import erp.compra.Repositorio.Repo_Inventario;
 import erp.compra.Repositorio.Repo_Sucursal;
 

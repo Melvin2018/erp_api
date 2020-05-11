@@ -16,15 +16,15 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Entity
 @Table(name = "empleado")
 @Data
-@ToString(of = "nombre")
 @NoArgsConstructor
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Empleado implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -51,6 +51,6 @@ public class Empleado implements Serializable {
     private String direccion;
     @JsonIgnore
     @JoinColumn(name = "sucursal", referencedColumnName = "id")
-    @ManyToOne(fetch  = FetchType.LAZY) 
+    @ManyToOne(optional=false,fetch  = FetchType.LAZY) 
     private Sucursal sucursal;
 }

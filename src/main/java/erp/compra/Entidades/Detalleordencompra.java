@@ -29,7 +29,6 @@ public class Detalleordencompra implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Column(name = "costo")
@@ -41,5 +40,7 @@ public class Detalleordencompra implements Serializable {
     @JoinColumn(name = "ordencompra", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Ordencompra ordencompra;
-    
+    @JoinColumn(name = "producto", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Producto producto;
 }

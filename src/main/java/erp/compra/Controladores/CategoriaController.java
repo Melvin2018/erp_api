@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import erp.compra.Entidades.Categoria;
+import erp.compra.Entidades.*;
 import erp.compra.Servicios.Service_Categoria;
 
 @RestController
@@ -21,26 +21,25 @@ import erp.compra.Servicios.Service_Categoria;
 public class CategoriaController {
     
     @Autowired
-    private Service_Categoria categoria;
-  
+    private Service_Categoria repo;
 
-    @GetMapping(value="categoria/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Categoria> findAll() {
-        return categoria.findAll();
+    @GetMapping(value="categoria", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<List<Categoria>> findAll() {
+        return repo.findAll();
     }
 
-    @GetMapping(value = "categoria/{id}", produces = "application/json; charset=utf-8")
-    public ResponseEntity<Categoria> empresa(@PathVariable(value = "id", required = true) Long id) {
-        return categoria.findOne(id);
+    @GetMapping(value = "categoria/{id}", produces =  MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<Categoria> findBy(@PathVariable(value = "id", required = true) Long id) {
+        return repo.findOne(id);
     }
 
-    @PostMapping(value = "categoria", produces = "application/json; charset=utf-8", consumes = "application/json")
-    public Categoria save(@RequestBody Categoria inventarioo) {
-        return categoria.save(inventarioo);
+    @PostMapping(value = "categoria", produces =  MediaType.APPLICATION_JSON_UTF8_VALUE, consumes =  MediaType.APPLICATION_JSON_VALUE)
+    public Categoria save(@RequestBody Categoria categoria) {
+        return repo.save(categoria);
     }
 
-    @DeleteMapping(value="categoria/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value="categoria/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<Categoria> deleteById(@PathVariable(value = "id", required = true) Long id) {
-        return categoria.deleteById(id);
+        return repo.deleteById(id);
     }
 }

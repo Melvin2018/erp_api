@@ -12,8 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import erp.compra.Entidades.Inventario;
+import erp.compra.Entidades.*;
 import erp.compra.Servicios.Service_Inventario;
 
 @RestController
@@ -28,12 +27,12 @@ public class InventarioControler {
         return inventario.findAll(id);
     }
 
-    @GetMapping(value = "inventario/{id}", produces = "application/json; charset=utf-8")
-    public ResponseEntity<Inventario> empresa(@PathVariable(value = "id", required = true) Long id) {
+    @GetMapping(value = "inventario/{id}", produces =  MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<Inventario> findBy(@PathVariable(value = "id", required = true) Long id) {
         return inventario.findOne(id);
     }
 
-    @PostMapping(value = "inventario", produces = "application/json; charset=utf-8", consumes = "application/json")
+    @PostMapping(value = "inventario", produces =  MediaType.APPLICATION_JSON_VALUE, consumes =  MediaType.APPLICATION_JSON_VALUE)
     public Inventario save(@RequestBody Inventario inventarioo) {
         return inventario.save(inventarioo);
     }

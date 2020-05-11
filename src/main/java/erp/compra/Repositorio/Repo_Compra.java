@@ -1,6 +1,6 @@
 package erp.compra.Repositorio;
 
-import erp.compra.Entidades.Compra;
+import erp.compra.Entidades.*;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

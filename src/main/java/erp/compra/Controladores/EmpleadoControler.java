@@ -12,14 +12,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import erp.compra.Entidades.Empleado;
-import erp.compra.Servicios.Empleado_Service;
+import erp.compra.Entidades.*;
+import erp.compra.Servicios.Service_Empleado;
 
 @RequestMapping(value = "/api/v1/")
 public class EmpleadoControler {
 
     @Autowired
-    private Empleado_Service service;
+    private Service_Empleado service;
 
     @GetMapping(value = "empleado", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Empleado>> findAll(@RequestParam(value = "sucursal", required = true) Long id) {

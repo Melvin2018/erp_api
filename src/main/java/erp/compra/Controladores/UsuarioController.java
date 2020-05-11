@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import erp.compra.Entidades.Usuario;
+import erp.compra.Entidades.*;
 import erp.compra.Servicios.Service_Usuario;
 
 @RestController
@@ -22,22 +21,22 @@ public class UsuarioController {
     private Service_Usuario user;
   
 
-    @GetMapping(value="categoria/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value="usuario", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Usuario> findAll() {
         return user.findAll();
     }
 
-    @GetMapping(value = "categoria/{id}", produces = "application/json; charset=utf-8")
-    public ResponseEntity<Usuario> empresa(@PathVariable(value = "id", required = true) Long id) {
+    @GetMapping(value = "usuario/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Usuario> findBy(@PathVariable(value = "id", required = true) Long id) {
         return user.findOne(id);
     }
 
-    @PostMapping(value = "categoria", produces = "application/json; charset=utf-8", consumes = "application/json")
+    @PostMapping(value = "usuario", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public Usuario save(@RequestBody Usuario inventarioo) {
         return user.save(inventarioo);
     }
 
-    @DeleteMapping(value="categoria/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value="usuario/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Usuario> deleteById(@PathVariable(value = "id", required = true) Long id) {
         return user.deleteById(id);
     }

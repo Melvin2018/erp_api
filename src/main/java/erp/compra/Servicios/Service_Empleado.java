@@ -7,13 +7,11 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
-import erp.compra.Entidades.Empleado;
-import erp.compra.Entidades.Sucursal;
+import erp.compra.Entidades.*;
 import erp.compra.Repositorio.Repo_Empleado;
 import erp.compra.Repositorio.Repo_Sucursal;
 
-public class Empleado_Service {
+public class Service_Empleado {
     @Autowired
     private Repo_Empleado empleado;
     @Autowired

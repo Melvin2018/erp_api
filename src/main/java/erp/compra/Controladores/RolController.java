@@ -12,34 +12,33 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import erp.compra.Entidades.Rol;
+import erp.compra.Entidades.*;
 import erp.compra.Servicios.Service_Rol;
 
 @RestController
 @RequestMapping(value = "/api/v1/")
 public class RolController {
     @Autowired
-    private Service_Rol rol;
+    private Service_Rol repo_rol;
   
 
-    @GetMapping(value="categoria/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value="rol", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public List<Rol> findAll() {
-        return rol.findAll();
+        return repo_rol.findAll();
     }
 
-    @GetMapping(value = "categoria/{id}", produces = "application/json; charset=utf-8")
-    public ResponseEntity<Rol> empresa(@PathVariable(value = "id", required = true) Long id) {
-        return rol.findOne(id);
+    @GetMapping(value = "rol/{id}", produces =  MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<Rol> findBy(@PathVariable(value = "id", required = true) Long id) {
+        return repo_rol.findOne(id);
     }
 
-    @PostMapping(value = "categoria", produces = "application/json; charset=utf-8", consumes = "application/json")
-    public Rol save(@RequestBody Rol inventarioo) {
-        return rol.save(inventarioo);
+    @PostMapping(value = "rol", produces =  MediaType.APPLICATION_JSON_VALUE, consumes =  MediaType.APPLICATION_JSON_VALUE)
+    public Rol save(@RequestBody Rol rol) {
+        return repo_rol.save(rol);
     }
 
-    @DeleteMapping(value="categoria/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value="rol/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Rol> deleteById(@PathVariable(value = "id", required = true) Long id) {
-        return rol.deleteById(id);
+        return repo_rol.deleteById(id);
     }
 }
