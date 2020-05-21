@@ -34,12 +34,10 @@ public class Ordencompra implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
-    @Basic(optional = false)
     @NotNull
     @Column(name = "fecha")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
-    @Basic(optional = false)
     @NotNull
     @Column(name = "estado")
     private int estado;

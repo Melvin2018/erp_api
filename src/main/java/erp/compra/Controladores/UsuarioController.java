@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import erp.compra.Entidades.*;
 import erp.compra.Servicios.Service_Usuario;
@@ -17,26 +18,30 @@ import erp.compra.Servicios.Service_Usuario;
 @RestController
 @RequestMapping(value = "/api/v1/")
 public class UsuarioController {
+  
     @Autowired
     private Service_Usuario user;
   
-
     @GetMapping(value="usuario", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Usuario> findAll() {
         return user.findAll();
     }
 
-    @GetMapping(value = "usuario/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "usuario/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<Usuario> findBy(@PathVariable(value = "id", required = true) Long id) {
         return user.findOne(id);
     }
 
+    @GetMapping(value = "validar")
+    public ResponseEntity<Boolean> findByPassword(@RequestParam String usuario,@RequestParam String password){
+      return ResponseEntity.ok(!user.findAll().stream().noneMatch(x->x.getPassword().equals(password)));
+    }
     @PostMapping(value = "usuario", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Usuario save(@RequestBody Usuario inventarioo) {
-        return user.save(inventarioo);
+    public Usuario save(@RequestBody Usuario usuario) {
+        return user.save(usuario);
     }
 
-    @DeleteMapping(value="usuario/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value="usuario/{id}", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<Usuario> deleteById(@PathVariable(value = "id", required = true) Long id) {
         return user.deleteById(id);
     }

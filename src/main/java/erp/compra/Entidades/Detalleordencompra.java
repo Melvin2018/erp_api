@@ -29,11 +29,9 @@ public class Detalleordencompra implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
-    @Basic(optional = false)
     @NotNull
     @Column(name = "costo")
     private BigDecimal costo;
-    @Basic(optional = false)
     @NotNull
     @Column(name = "cantidad")
     private int cantidad;

@@ -30,14 +30,11 @@ public class Inventario implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
-    
     @Column(name = "tipoinventario")
     private Integer tipoinventario;
-   
     @JoinColumn(name = "sucursal", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Sucursal sucursal;
-    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "inventario", fetch = FetchType.LAZY)
     private List<Detalleinventario> detalleinventarioList;
 }

@@ -14,7 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import lombok.*;
 
 @Entity
@@ -30,12 +29,9 @@ public class Categoria implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
-    @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 100)
     @Column(name = "nombre")
     private String nombre;
-    @Basic(optional = false)
     @NotNull
     @Column(name = "margen")
     private BigDecimal margen;

@@ -34,15 +34,12 @@ public class Compra implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
-    @Basic(optional = false)
     @NotNull
     @Column(name = "fecha")
     private LocalDateTime fecha;
-    @Basic(optional = false)
     @NotNull
     @Column(name = "costomanejo")
     private BigDecimal costomanejo;
-    @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "factura")

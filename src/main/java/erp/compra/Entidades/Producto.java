@@ -35,7 +35,6 @@ public class Producto implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
-    @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "nombre")
@@ -44,7 +43,6 @@ public class Producto implements Serializable {
     @Size(max = 65535)
     @Column(name = "imagen")
     private String imagen;
-    @Basic(optional = false)
     @NotNull
     @Column(name = "margen")
     private BigDecimal margen;

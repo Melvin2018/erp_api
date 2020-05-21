@@ -30,23 +30,18 @@ public class Detalleinventario implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
-    @Basic(optional = false)
     @NotNull
     @Column(name = "costo")
     private BigDecimal costo;
-    @Basic(optional = false)
     @NotNull
     @Column(name = "margen")
     private BigDecimal margen;
-    @Basic(optional = false)
     @NotNull
     @Column(name = "existencia")
     private int existencia;
-    @Basic(optional = false)
     @NotNull
     @Column(name = "stockmin")
     private int stockmin;
-    @Basic(optional = false)
     @NotNull
     @Column(name = "stockmax")
     private int stockmax;

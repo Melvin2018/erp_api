@@ -7,9 +7,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import erp.compra.Entidades.*;
 import erp.compra.Repositorio.Repo_Usuario;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 public class Service_Usuario {
+    
+    @Autowired
     private Repo_Usuario user;
 
     public List<Usuario> findAll() {
